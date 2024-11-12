@@ -27,6 +27,8 @@ SetCompressorDictSize 64
 !define MUI_FINISHPAGE_LINK "$(LINK_Help)"
 !define MUI_FINISHPAGE_LINK_LOCATION "$InstDir\help\help_eng.htm"
 
+!define /date COMPILATION_TIMESTAMP "%Y-%m-%d %H:%M:%S"
+
 RequestExecutionLevel user
 ; SetShellVarContext all
 InstallDir "$LOCALAPPDATA\Programs\Ballance"
@@ -75,6 +77,15 @@ Section "Ballance Mod Loader" SecBML
 
 SectionEnd
 
+Section /o "$(TITLE_BMLExtra)" SecBMLExtra
+
+  SetDetailsPrint both
+  SetOutPath $InstDir
+  DetailPrint "Extracting extra mods for BMLPlus..."
+  File /r "BMLPlus_Extra\*.*"
+
+SectionEnd
+
 Section "$(TITLE_Shortcut)" SecShortcut
 
   SetOutPath "$InstDir\Bin"
@@ -100,8 +111,11 @@ LangString WARN_DirectoryExists ${LANG_SIMPCHINESE} `"$InstDir" 目录已经存�
 LangString TITLE_Ballance ${LANG_ENGLISH} "Ballance"
 LangString TITLE_Ballance ${LANG_SIMPCHINESE} "Ballance (平衡球)"
 
-LangString TITLE_Installer ${LANG_ENGLISH} "Ballance Modern Repack with NSIS ${NSIS_VERSION}"
-LangString TITLE_Installer ${LANG_SIMPCHINESE} "Ballance 现代整合包 with NSIS ${NSIS_VERSION}"
+LangString TITLE_Installer ${LANG_ENGLISH} "Ballance Modern Repack with NSIS ${NSIS_VERSION} - ${COMPILATION_TIMESTAMP}"
+LangString TITLE_Installer ${LANG_SIMPCHINESE} "Ballance 现代整合包 with NSIS ${NSIS_VERSION} - ${COMPILATION_TIMESTAMP}"
+
+LangString TITLE_BMLExtra ${LANG_ENGLISH} "Extra Mods"
+LangString TITLE_BMLExtra ${LANG_SIMPCHINESE} "额外 Mod"
 
 LangString TITLE_Shortcut ${LANG_ENGLISH} "Desktop Shortcut"
 LangString TITLE_Shortcut ${LANG_SIMPCHINESE} "桌面快捷方式"
@@ -115,6 +129,9 @@ LangString DESC_SecBallance ${LANG_SIMPCHINESE} "Ballance 游戏运行的核心�
 LangString DESC_SecBML ${LANG_ENGLISH} "Ballance Mod Loader (Plus). Usually required for the game to run on modern systems."
 LangString DESC_SecBML ${LANG_SIMPCHINESE} "Ballance Mod 加载器 (Plus)，使得游戏可以在现代系统上运行。"
 
+LangString DESC_SecBMLExtra ${LANG_ENGLISH} "More optional mods for Ballance Mod Loader Plus."
+LangString DESC_SecBMLExtra ${LANG_SIMPCHINESE} "适用于 Ballance Mod Loader Plus 的更多非必要 Mod。"
+
 LangString DESC_SecShortcut ${LANG_ENGLISH} "Create a shortcut on the desktop."
 LangString DESC_SecShortcut ${LANG_SIMPCHINESE} "在桌面上创建快捷方式。"
 
@@ -122,5 +139,6 @@ LangString DESC_SecShortcut ${LANG_SIMPCHINESE} "在桌面上创建快捷方式�
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT ${SecBallance} $(DESC_SecBallance)
   !insertmacro MUI_DESCRIPTION_TEXT ${SecBML} $(DESC_SecBML)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecBMLExtra} $(DESC_SecBMLExtra)
   !insertmacro MUI_DESCRIPTION_TEXT ${SecShortcut} $(DESC_SecShortcut)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END

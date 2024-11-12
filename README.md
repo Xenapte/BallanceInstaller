@@ -12,6 +12,6 @@ Due to related copyright issues we can't provide the actual game files in this r
 
 This installer uses the [NSIS (Nullsoft Scriptable Install System)](https://nsis.sourceforge.io/) as the packager. To build the package you must first have NSIS installed.
 
-Then, place your Ballance and [BMLPlus](https://github.com/doyaGu/BallanceModLoaderPlus) files as the `Ballance` and `BMLPlus` directories respectively, and extract the icon from `Ballance/Bin/Player.exe` to `Resources/Ballance.ico`.
+Then, place your Ballance and [BMLPlus](https://github.com/doyaGu/BallanceModLoaderPlus) files as the `Ballance` and `BMLPlus` directories respectively, and extract the icon from `Ballance/Bin/Player.exe` to `Resources/Ballance.ico`. Extra BMLPlus Mods should be placed in `BMLPlus_Extra`.
 
 After all these are done, compile the script `Ballance.nsi` with `makensis.exe` and you are good to go.
