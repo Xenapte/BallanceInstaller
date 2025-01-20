@@ -59,6 +59,10 @@ Section "Ballance" SecBallance
   SetOutPath $InstDir
   DetailPrint "Extracting Ballance..."
   File /r "Ballance\*.*"
+  
+  ; Prevent Windows scaling Ballance and making everything blurry
+  DetailPrint "Setting DPI override..."
+  WriteRegStr "HKCU" "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$InstDir\Bin\Player.exe" "~ HIGHDPIAWARE"
 
   ; SetCompress off
 	; ReserveFile "Ballance.7z"
