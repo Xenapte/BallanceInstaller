@@ -99,14 +99,15 @@ Section "Visual C++ Redistributable" SecVCRedist
   SetOutPath "$TEMP"
   File "Redist\VC_redist.x86.exe"
   ExecWait '"$TEMP\VC_redist.x86.exe" /install /quiet /norestart' $0
-  IntCmp $0 0 +2
+  IntCmp $0 0 VCInstallSuccessful
     MessageBox MB_OK  "$(ERROR_INSTALL_VCREDIST_FAILED)"
     Goto End
 
-  Delete "$TEMP\VC_redist.x86.exe"
-
+VCInstallSuccessful:
   DetailPrint "Visual C++ Redistributable installed successfully."
+
 End:
+  Delete "$TEMP\VC_redist.x86.exe"
 
 SectionEnd
 
