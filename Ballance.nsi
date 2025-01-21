@@ -62,7 +62,7 @@ Section "Ballance" SecBallance
   SetOutPath $InstDir
   DetailPrint "Extracting Ballance..."
   File /r "Ballance\*.*"
-  
+
   ; Prevent Windows scaling Ballance and making everything blurry
   DetailPrint "Setting DPI override..."
   WriteRegStr "HKCU" "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$InstDir\Bin\Player.exe" "~ HIGHDPIAWARE"
@@ -71,7 +71,7 @@ Section "Ballance" SecBallance
 	; ReserveFile "Ballance.7z"
 	; File "Ballance.7z"
   ; Nsis7z::ExtractWithDetails "Ballance.7z" "Installing package %s..."
-  ; Delete "$OUTDIR\Ballance.7z"  
+  ; Delete "$OUTDIR\Ballance.7z"
 
 SectionEnd
 
@@ -97,8 +97,8 @@ Section "Visual C++ Redistributable" SecVCRedist
 
   DetailPrint "Installing Visual C++ Redistributable..."
   SetOutPath "$TEMP"
-  File "Redist\VC_redist.x86.exe"
-  ExecWait '"$TEMP\VC_redist.x86.exe" /install /quiet /norestart' $0
+  File "Redist\vc_redist.x86.exe"
+  ExecWait '"$TEMP\vc_redist.x86.exe" /install /quiet /norestart' $0
   IntCmp $0 0 VCInstallSuccess
     MessageBox MB_OK  "$(ERROR_VCRedistInstallFailure)"
     Goto End
@@ -107,7 +107,7 @@ VCInstallSuccess:
   DetailPrint "Visual C++ Redistributable installed successfully."
 
 End:
-  Delete "$TEMP\VC_redist.x86.exe"
+  Delete "$TEMP\vc_redist.x86.exe"
 
 SectionEnd
 
@@ -162,8 +162,8 @@ Function .onInit
   ; Call IsVCRedistInstalled to determine the vcredist installation state
   Call IsVCRedistInstalled
   IntCmp $3 1 Installed
-    MessageBox MB_OK $(Info_VCRedistRequired)
-    IntOp $4 ${SF_SELECTED} | ${SF_RO} 
+    MessageBox MB_OK $(INFO_VCRedistRequired)
+    IntOp $4 ${SF_SELECTED} | ${SF_RO}
     SectionSetFlags ${SecVCRedist} $4
     Return
 Installed:
@@ -174,8 +174,8 @@ Function runBallance
   Exec "$InstDir\Bin\Player.exe"
 FunctionEnd
 
-LangString Info_VCRedistRequired ${LANG_ENGLISH} "Visual C++ Redistributable is not installed or outdated. It will be installed during the setup."
-LangString Info_VCRedistRequired ${LANG_SIMPCHINESE} "Visual C++ Redistributable 未安装或版本过旧。将在安装过程中安装。"
+LangString INFO_VCRedistRequired ${LANG_ENGLISH} "Visual C++ Redistributable is not installed or outdated. It will be installed during the setup."
+LangString INFO_VCRedistRequired ${LANG_SIMPCHINESE} "Visual C++ Redistributable 未安装或版本过旧。将在安装过程中安装。"
 
 LangString ERROR_VCRedistInstallFailure ${LANG_ENGLISH} "Failed to install Visual C++ Redistributable. Please install it manually."
 LangString ERROR_VCRedistInstallFailure ${LANG_SIMPCHINESE} "安装 Visual C++ Redistributable 失败。请手动安装。"
