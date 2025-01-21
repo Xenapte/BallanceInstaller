@@ -99,11 +99,11 @@ Section "Visual C++ Redistributable" SecVCRedist
   SetOutPath "$TEMP"
   File "Redist\VC_redist.x86.exe"
   ExecWait '"$TEMP\VC_redist.x86.exe" /install /quiet /norestart' $0
-  IntCmp $0 0 VCInstallSuccessful
-    MessageBox MB_OK  "$(ERROR_INSTALL_VCREDIST_FAILED)"
+  IntCmp $0 0 VCInstallSuccess
+    MessageBox MB_OK  "$(ERROR_VCRedistInstallFailure)"
     Goto End
 
-VCInstallSuccessful:
+VCInstallSuccess:
   DetailPrint "Visual C++ Redistributable installed successfully."
 
 End:
@@ -162,7 +162,7 @@ Function .onInit
   ; Call IsVCRedistInstalled to determine the vcredist installation state
   Call IsVCRedistInstalled
   IntCmp $3 1 Installed
-    MessageBox MB_OK $(INFO_SHOULD_INSTALL_VCREDIST)
+    MessageBox MB_OK $(Info_VCRedistRequired)
     IntOp $4 ${SF_SELECTED} | ${SF_RO} 
     SectionSetFlags ${SecVCRedist} $4
     Return
@@ -174,11 +174,11 @@ Function runBallance
   Exec "$InstDir\Bin\Player.exe"
 FunctionEnd
 
-LangString INFO_SHOULD_INSTALL_VCREDIST ${LANG_ENGLISH} "Visual C++ Redistributable is not installed or outdated. It will be installed during the setup."
-LangString INFO_SHOULD_INSTALL_VCREDIST ${LANG_SIMPCHINESE} "Visual C++ Redistributable 未安装或版本过旧。将在安装过程中安装。"
+LangString Info_VCRedistRequired ${LANG_ENGLISH} "Visual C++ Redistributable is not installed or outdated. It will be installed during the setup."
+LangString Info_VCRedistRequired ${LANG_SIMPCHINESE} "Visual C++ Redistributable 未安装或版本过旧。将在安装过程中安装。"
 
-LangString ERROR_INSTALL_VCREDIST_FAILED ${LANG_ENGLISH} "Failed to install Visual C++ Redistributable. Please install it manually."
-LangString ERROR_INSTALL_VCREDIST_FAILED ${LANG_SIMPCHINESE} "安装 Visual C++ Redistributable 失败。请手动安装。"
+LangString ERROR_VCRedistInstallFailure ${LANG_ENGLISH} "Failed to install Visual C++ Redistributable. Please install it manually."
+LangString ERROR_VCRedistInstallFailure ${LANG_SIMPCHINESE} "安装 Visual C++ Redistributable 失败。请手动安装。"
 
 LangString WARN_DirectoryExists ${LANG_ENGLISH} `"$InstDir" directory already exists, continue installing anyways?`
 LangString WARN_DirectoryExists ${LANG_SIMPCHINESE} `"$InstDir" 目录已经存在，仍然要继续安装吗？`

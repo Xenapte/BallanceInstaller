@@ -4,14 +4,45 @@ Installer for the (modern repacked) Ballance game. Successor of the [BallanceSet
 
 ## Usage
 
-Just run the installer and follow it normally.
+**Just run the installer and follow it like you normally would.**
 
-Due to related copyright issues we can't provide the actual game files in this repository directly.
+Due to related copyright issues we can't provide actual game files in this repository directly; you need to find our releases on your own.
 
 ## Building
 
 This installer uses the [NSIS (Nullsoft Scriptable Install System)](https://nsis.sourceforge.io/) as the packager. To build the package you must first have NSIS installed.
 
-Then, place your Ballance and [BMLPlus](https://github.com/doyaGu/BallanceModLoaderPlus) files as the `Ballance` and `BMLPlus` directories respectively, and extract the icon from `Ballance/Bin/Player.exe` to `Resources/Ballance.ico`. Extra BMLPlus Mods should be placed in `BMLPlus_Extra`.
+### Preparing your game files
 
-After all these are done, compile the script `Ballance.nsi` with `makensis.exe` and you are good to go.
+- Place your Ballance files in a way that if we ignore their parent directories and just merge them together, we would get a full installation.
+  * Ballance and [BMLPlus](https://github.com/doyaGu/BallanceModLoaderPlus) files as the `Ballance` and `BMLPlus` directories respectively.
+  * Extra BMLPlus maps and mods should be placed in `BMLPlus_Extra`.
+- Place and extract the installer icon (same as the game icon) from `Ballance/Bin/Player.exe` to `Resources/Ballance.ico`.
+
+This is what your entire repository structure would look like if you did the above correctly:
+
+```text
+BallanceInstaller
+├─ Ballance.nsi
+├─ Ballance
+│  ├─ 3D Entities
+│  ├─ Bin
+│  ├─ BuildingBlocks
+│  └─ ...
+├─ BMLPlus
+│  ├─ BuildingBlocks
+│  └─ ModLoader
+│     ├─ Config
+│     ├─ Maps
+│     └─ ...
+├─ BMLPlus_Extra
+│  └─ ModLoader
+│     ├─ Maps
+│     └─ Mods
+└─ Resources
+   └─ Ballance.ico
+```
+
+### Compiling
+
+After you have prepared all required files in the above structure, compile the script `Ballance.nsi` with `makensis.exe` and you are good to go.
