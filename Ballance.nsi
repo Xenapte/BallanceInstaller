@@ -162,7 +162,6 @@ Function .onInit
     SectionSetFlags ${SecVCRedist} $4
     Return
 Installed:
-  SectionSetFlags ${SecVCRedist} ${SF_RO}
 FunctionEnd
 
 Function runBallance
