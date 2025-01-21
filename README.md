@@ -14,12 +14,12 @@ This installer uses the [NSIS (Nullsoft Scriptable Install System)](https://nsis
 
 ### Preparing your game files
 
-- Place your Ballance files in a way that if we ignore their parent directories and just merge them together, we would get a full installation.
+- Place your Ballance files in a way that if you ignore their parent directories and just merge them together, you would get a full installation.
   * Ballance and [BMLPlus](https://github.com/doyaGu/BallanceModLoaderPlus) files as the `Ballance` and `BMLPlus` directories respectively.
   * Extra BMLPlus maps and mods should be placed in `BMLPlus_Extra`.
 - Place and extract the installer icon (same as the game icon) from `Ballance/Bin/Player.exe` to `Resources/Ballance.ico`.
 
-This is what your entire repository structure would look like if you did the above correctly:
+This is what your repository would look like if you did the above correctly:
 
 ```text
 BallanceInstaller
