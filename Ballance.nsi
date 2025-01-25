@@ -29,9 +29,6 @@ SetCompressorDictSize 64
 
 !define /date COMPILATION_TIMESTAMP "%Y-%m-%d %H:%M:%S"
 
-!define REQUIRED_VCREDIST_MAJOR 14 ; Required vcredist major version
-!define REQUIRED_VCREDIST_MINOR 40 ; Required vcredist minor version
-
 RequestExecutionLevel user
 ; SetShellVarContext all
 InstallDir "$LOCALAPPDATA\Programs\Ballance"
@@ -93,14 +90,14 @@ Section /o "$(TITLE_BMLExtra)" SecBMLExtra
 
 SectionEnd
 
-Section /o "Visual C++ Redistributable" SecVCRedist
+Section "Visual C++ Redistributable" SecVCRedist
 
   DetailPrint "Installing Visual C++ Redistributable..."
   SetOutPath "$TEMP"
   File "Redist\VC_redist.x86.exe"
   ExecWait '"$TEMP\VC_redist.x86.exe" /install /quiet /norestart' $0
   IntCmp $0 0 VCInstallSuccess
-    MessageBox MB_OK  "$(ERROR_VCRedistInstallFailure)"
+    MessageBox MB_OK "$(ERROR_VCRedistInstallFailure)"
     Goto End
 
 VCInstallSuccess:
@@ -119,63 +116,14 @@ Section "$(TITLE_Shortcut)" SecShortcut
 
 SectionEnd
 
-Function IsVCRedistInstalled
-  SetRegView 32 ; Set registry view to 32-bit
-  ReadRegDWORD $1 HKLM "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x86" "Major"
-  ReadRegDWORD $2 HKLM "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x86" "Minor"
-
-  ; If no values are found, consider it not installed
-  IntCmp $1 0 NotInstalled
-  IntCmp $2 0 NotInstalled
-
-  ; Compare the major version
-  IntCmp $1 ${REQUIRED_VCREDIST_MAJOR} MajorMatch MajorTooOld MajorMatch
-
-  MajorTooOld:
-    StrCpy $3 0
-    Goto CompareDone
-
-  MajorMatch:
-    ; Compare the minor version if the major version matches
-    IntCmp $2 ${REQUIRED_VCREDIST_MINOR} MajorMatch MinorTooOld MinorMatch
-
-  MinorTooOld:
-    StrCpy $3 0
-    Goto CompareDone
-
-  MinorMatch:
-    StrCpy $3 1  ; Version is sufficient
-    Goto CompareDone
-
-NotInstalled:
-  StrCpy $3 0
-
-CompareDone:
-  ; Reset registry view to default
-  SetRegView 64
-  Return
-FunctionEnd
-
 Function .onInit
   !insertmacro MUI_LANGDLL_DISPLAY
-
-  ; Call IsVCRedistInstalled to determine the vcredist installation state
-  Call IsVCRedistInstalled
-  IntCmp $3 1 Installed
-    MessageBox MB_OK $(INFO_VCRedistRequired)
-    IntOp $4 ${SF_SELECTED} | ${SF_RO}
-    SectionSetFlags ${SecVCRedist} $4
-    Return
-Installed:
 FunctionEnd
 
 Function runBallance
   SetOutPath "$InstDir\Bin"
   Exec "$InstDir\Bin\Player.exe"
 FunctionEnd
-
-LangString INFO_VCRedistRequired ${LANG_ENGLISH} "Visual C++ Redistributable is not installed or outdated. It will be installed during the setup."
-LangString INFO_VCRedistRequired ${LANG_SIMPCHINESE} "Visual C++ Redistributable 未安装或版本过旧。将在安装过程中安装。"
 
 LangString ERROR_VCRedistInstallFailure ${LANG_ENGLISH} "Failed to install Visual C++ Redistributable. Please install it manually."
 LangString ERROR_VCRedistInstallFailure ${LANG_SIMPCHINESE} "安装 Visual C++ Redistributable 失败。请手动安装。"
