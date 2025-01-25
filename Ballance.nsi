@@ -93,12 +93,12 @@ Section /o "$(TITLE_BMLExtra)" SecBMLExtra
 
 SectionEnd
 
-Section "Visual C++ Redistributable" SecVCRedist
+Section /o "Visual C++ Redistributable" SecVCRedist
 
   DetailPrint "Installing Visual C++ Redistributable..."
   SetOutPath "$TEMP"
-  File "Redist\vc_redist.x86.exe"
-  ExecWait '"$TEMP\vc_redist.x86.exe" /install /quiet /norestart' $0
+  File "Redist\VC_redist.x86.exe"
+  ExecWait '"$TEMP\VC_redist.x86.exe" /install /quiet /norestart' $0
   IntCmp $0 0 VCInstallSuccess
     MessageBox MB_OK  "$(ERROR_VCRedistInstallFailure)"
     Goto End
@@ -107,7 +107,7 @@ VCInstallSuccess:
   DetailPrint "Visual C++ Redistributable installed successfully."
 
 End:
-  Delete "$TEMP\vc_redist.x86.exe"
+  Delete "$TEMP\VC_redist.x86.exe"
 
 SectionEnd
 

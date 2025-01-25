@@ -20,7 +20,7 @@ This installer uses the [NSIS (Nullsoft Scriptable Install System)](https://nsis
   * Ballance and [BMLPlus](https://github.com/doyaGu/BallanceModLoaderPlus) files as the `Ballance` and `BMLPlus` directories respectively.
   * Extra BMLPlus maps and mods should be placed in `BMLPlus_Extra`.
 - Place and extract the installer icon (same as the game icon) from `Ballance/Bin/Player.exe` to `Resources/Ballance.ico`.
-- Place the [32-bit (x86) version](https://aka.ms/vs/17/release/vc_redist.x86.exe) of [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist) in `Redist`, and name it `vc_redist.x86.exe`.
+- Place the [32-bit (x86) version](https://aka.ms/vs/17/release/vc_redist.x86.exe) of [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist) in `Redist`, and name it `VC_redist.x86.exe`.
 
 #### Things to note
 
@@ -51,7 +51,7 @@ BallanceInstaller
 │     ├─ Maps
 │     └─ Mods
 ├─ Redist
-│  └─ vc_redist.x86.exe
+│  └─ VC_redist.x86.exe
 └─ Resources
    └─ Ballance.ico
 ```
