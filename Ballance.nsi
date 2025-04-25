@@ -58,7 +58,7 @@ Section "Ballance" SecBallance
   SetDetailsPrint both
   SetOutPath $InstDir
   DetailPrint "Extracting Ballance..."
-  File /r "Ballance\*.*"
+  File /r /x "*.gitignore" /x "*.gitkeep" "Ballance\*.*"
 
   ; Prevent Windows scaling Ballance and making everything blurry
   DetailPrint "Setting DPI override..."
@@ -155,8 +155,8 @@ LangString DESC_SecBML ${LANG_SIMPCHINESE} "Ballance Mod 加载器 (Plus)，使�
 LangString DESC_SecBMLExtra ${LANG_ENGLISH} "More optional mods for Ballance Mod Loader Plus."
 LangString DESC_SecBMLExtra ${LANG_SIMPCHINESE} "适用于 Ballance Mod Loader Plus 的更多非必要 Mod。"
 
-LangString DESC_SecVCRedist ${LANG_ENGLISH} "Visual C++ Redistributable 2015-2019. Required for running the game."
-LangString DESC_SecVCRedist ${LANG_SIMPCHINESE} "Visual C++ Redistributable 2015-2019。运行游戏所必需。"
+LangString DESC_SecVCRedist ${LANG_ENGLISH} "Visual C++ Redistributable 2015-2019. Runtime library required for running the game."
+LangString DESC_SecVCRedist ${LANG_SIMPCHINESE} "Visual C++ Redistributable 2015-2019。游戏所依赖的运行库。"
 
 LangString DESC_SecShortcut ${LANG_ENGLISH} "Create a shortcut on the desktop."
 LangString DESC_SecShortcut ${LANG_SIMPCHINESE} "在桌面上创建快捷方式。"
