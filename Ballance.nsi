@@ -60,15 +60,9 @@ Section "Ballance" SecBallance
   DetailPrint "Extracting Ballance..."
   File /r /x "*.gitignore" /x "*.gitkeep" "Ballance\*.*"
 
-  ; Prevent Windows scaling Ballance and making everything blurry
-  DetailPrint "Setting DPI override..."
-  WriteRegStr "HKCU" "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$InstDir\Bin\Player.exe" "~ HIGHDPIAWARE"
-
-  ; SetCompress off
-	; ReserveFile "Ballance.7z"
-	; File "Ballance.7z"
-  ; Nsis7z::ExtractWithDetails "Ballance.7z" "Installing package %s..."
-  ; Delete "$OUTDIR\Ballance.7z"
+;   Prevent Windows scaling Ballance and making everything blurry
+;  DetailPrint "Setting DPI override..."
+;  WriteRegStr "HKCU" "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$InstDir\Bin\Player.exe" "~ HIGHDPIAWARE"
 
 SectionEnd
 
