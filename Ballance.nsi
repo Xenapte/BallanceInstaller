@@ -91,8 +91,14 @@ Section "Visual C++ Redistributable" SecVCRedist
   File "Redist\VC_redist.x86.exe"
   ExecWait '"$TEMP\VC_redist.x86.exe" /install /quiet /norestart' $0
   IntCmp $0 0 VCInstallSuccess
+  IntCmp $0 3010 VCInstallRebootNeeded
     MessageBox MB_OK "$(ERROR_VCRedistInstallFailure)"
     Goto End
+
+VCInstallRebootNeeded:
+  DetailPrint "Visual C++ Redistributable installed successfully, but a reboot is required."
+  SetRebootFlag true
+  Goto End
 
 VCInstallSuccess:
   DetailPrint "Visual C++ Redistributable installed successfully."
